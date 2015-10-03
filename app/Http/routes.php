@@ -12,5 +12,12 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return Redirect::to('index.html'); // this part belongs to AngularJS
+});
+
+// Route group for API versioning
+Route::group(array('prefix' => 'api/v1'), function () {
+    Route::resource('states', 'StatesController', ['only' => ['index', 'store', 'update', 'destroy']]);
+    Route::resource('persons', 'PersonsController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
+    Route::resource('items', 'ItemsController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
 });
