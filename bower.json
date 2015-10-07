@@ -1,0 +1,9 @@
+{
+  "name": "app-name",
+  "version": "0.0.1",
+  "description": "WebFrontend for the Inventory",
+  "dependencies": {
+    "angular-bootstrap": "~0.13.4"
+  },
+  "private": true
+}
