@@ -23,6 +23,7 @@
 
 
     <script src="vendor/angular/angular.js"></script>
+    <script src="vendor/angular-route/angular-route.js"></script>
 
 </head>
 
@@ -58,17 +59,23 @@
         <h1>Buttons</h1>
     </div>
 
-    <ul>
-        <li ng-repeat="item in items">{{item | json}}</li>
+    <div class="container">
+        <div class="col-md-3">
+            <div ng-controller="listController" class="list-group">
+                <a ng-repeat="item in inventoryList" class="list-group-item" href="#">{{item.title}}</a>
 
-    </ul>
-    <p>
-        Text
-    </p>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <p>
+                Text
+            </p>
 
-    <p>
-        Angular is {{ "working" }}
-    </p>
+            <p>
+                Angular is {{ "working" }}
+            </p>
+        </div>
+    </div>
 
 
 
