@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "description": "WebFrontend for the Inventory",
   "dependencies": {
-    "angular-bootstrap": "~0.13.4"
+    "bootstrap":"3.3.5",
+    "angular-bootstrap": "~0.13.4",
+    "angular-route": "1.4.x"
   },
   "private": true
 }
