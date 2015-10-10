@@ -82,6 +82,10 @@ class ItemsController extends Controller
             if($request->has('user_id') && $person = Persons::find($request->input('user_id'))){
                 $data->user_id = $person->user_id;
             }
+
+            if($request->has('title')){
+                $data->title = $request->input('title');
+            }
             if($request->has('description')){
                 $data->description = $request->input('description');
             }
