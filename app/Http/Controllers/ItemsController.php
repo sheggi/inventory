@@ -80,7 +80,7 @@ class ItemsController extends Controller
                 $data->status = $status->id;
             }
             if($request->has('user_id') && $person = Persons::find($request->input('user_id'))){
-                $data->user_id = $person->user_id;
+                $data->user_id = $person->id;
             }
 
             if($request->has('title')){
