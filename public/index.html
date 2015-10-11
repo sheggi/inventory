@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" ng-app="App">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,7 +27,7 @@
 
 </head>
 
-<body ng-app="App">
+<body ng-controller="pageController">
 
 
 <!-- Fixed navbar -->
@@ -53,40 +53,45 @@
     </div>
 </nav>
 
-<div class="container theme-showcase" role="main">
+<div class="container" ng-hide="pageReady" ng-cloak>
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{loadingProgress}}%;">
+            <span class="sr-only">{{loadingProgress}}% Complete</span>
+        </div>
+    </div>
+</div>
+
+<div class="container theme-showcase" role="main" ng-show="pageReady" ng-cloak>
 
     <div class="page-header">
-        <h1>Buttons</h1>
+        <h1>Inventar</h1>
     </div>
 
     <div class="container">
-        <div ng-controller="listController" class="col-md-3">
+
+        <div ng-controller="itemController" class="col-md-9 col-md-push-3">
+            <span class="pull-right">{{itemStatusText}}</span>
+            <h3>
+                [{{item.id}}] {{item.title}}
+            </h3>
+            <form ng-show="itemReady">
+                <select class="form-control" ng-options="option.state for option in statusList track by option.id" ng-model="item.status"></select>
+                <input type="text" ng-model="item.title" class="form-control">
+                <textarea ng-model="item.description" class="form-control"></textarea>
+                <select class="form-control" ng-options="option.name for option in personList track by option.id" ng-model="item.user_id">
+                </select>
+                <button ng-click="saveItem(item)">Save</button>
+            </form>
+            <hr>
+        </div>
+
+        <div ng-controller="listController" class="col-md-3 col-md-pull-9">
             <div class="list-group">
-                <a ng-repeat="item in inventoryList" class="list-group-item" href="#/items/{{item.id}}">{{item.title}}</a>
+                <a ng-repeat="item in itemList" class="list-group-item" ng-click="selectItem(item.id)">{{item.title}}</a>
 
             </div>
         </div>
-        <div class="col-md-9">
 
-
-
-            <div ng-controller="itemController">
-                <form>
-                    <h3>
-                        [{{item.id}}] {{item.title}}
-                    </h3>
-                    <b>{{item.status}}</b>
-                    <input type="text" ng-model="item.title" class="form-control">
-                    <textarea ng-model="item.description" class="form-control"></textarea>
-                    <p>{{item | json}}</p>
-                    <button ng-click="saveItem(item)">Save</button>
-                </form>
-            </div>
-
-            <p>
-                Angular is {{ "working" }}
-            </p>
-        </div>
     </div>
 
 
