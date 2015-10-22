@@ -99,7 +99,7 @@ app.factory("backendService", ["$http", "$rootScope",function($http, $rootScope)
 
     backendService.saveItem = function(item){
 
-        // FIXXX clone item, so  local changes don't afect orginal
+        // TODO clone item, so  local changes don't afect orginal
 
         // reduce linked data
         if(typeof(item.status) === "object"){
@@ -136,6 +136,8 @@ app.controller("pageController",["$scope", "backendService", function($scope, ba
     $scope.loadingProgress = 0;
     $scope.loadingMax = 100;
 
+    $scope.pageRoute = "/";
+
     $scope.$on("backendLoading", function () {
         $scope.pageReady = false;
         $scope.loadingProgress = backendService.loadingProgress;
@@ -143,6 +145,8 @@ app.controller("pageController",["$scope", "backendService", function($scope, ba
     $scope.$on("backendReady",function(){
         $scope.pageReady = true;
     });
+
+
 
 }]);
 
