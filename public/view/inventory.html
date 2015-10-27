@@ -1,0 +1,32 @@
+
+<div class="page-header">
+    <h1>Inventar</h1>
+</div>
+
+<div class="container">
+
+    <div ng-controller="itemController" class="col-md-9 col-md-push-3">
+        <span class="pull-right">{{itemStatusText}}</span>
+        <h3>
+            [{{item.id}}] {{item.title}}
+        </h3>
+        <form ng-show="itemReady">
+            <select class="form-control" ng-options="option.state for option in statusList track by option.id" ng-model="item.status"></select>
+            <input type="text" ng-model="item.title" class="form-control">
+            <textarea ng-model="item.description" class="form-control"></textarea>
+            <select class="form-control" ng-options="option.name for option in personList track by option.id" ng-model="item.user_id">
+            </select>
+            <button ng-click="saveItem(item)">Save</button>
+        </form>
+        <hr>
+    </div>
+
+    <div ng-controller="listController" class="col-md-3 col-md-pull-9">
+        <div class="list-group">
+            <a ng-repeat="item in itemList" class="list-group-item" ng-click="selectItem(item.id)">{{item.title}}</a>
+
+        </div>
+    </div>
+
+</div>
+

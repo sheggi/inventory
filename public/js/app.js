@@ -1,4 +1,4 @@
-var app = angular.module("App",["ui.bootstrap"]);
+var app = angular.module("App",["ui.bootstrap", "ngRoute"]);
 
 app.factory("backendService", ["$http", "$rootScope",function($http, $rootScope){
     var backendService = {
@@ -126,7 +126,27 @@ app.factory("backendService", ["$http", "$rootScope",function($http, $rootScope)
 
 }]);
 
-app.controller("pageController",["$scope", "backendService", function($scope, backendService){
+app.config(["$routeProvider", "$locationProvider", function($routeProvider, $locationProvider){
+    $routeProvider
+        .when('/inventory/', {
+            templateUrl: 'view/inventory.html',
+            controller: function($scope) {$scope.classname="error"}
+        })
+        .when('/archive/', {
+            templateUrl: 'view/archive.html',
+            controller: function($scope) {$scope.classname="error"}
+        })
+        .when('/people/', {
+            template: '<div class="box" ng-class="classname">people</div>',
+            controller: function($scope) {$scope.classname="error"}
+        }).
+        otherwise({redirectTo: '/inventory/'});
+
+    // $locationProvider.html5Mode(true);
+
+}]);
+
+app.controller("pageController",["$scope", "backendService", "$location", function($scope, backendService, $location){
 
     // do all the stuff you need to hav te page ready
 
@@ -147,6 +167,17 @@ app.controller("pageController",["$scope", "backendService", function($scope, ba
     });
 
 
+    $scope.pageList = [
+        {url:'/inventory/', name: 'Inventar'},
+        {url:'/archive/', name: 'Archiv'},
+        {url:'/people/', name: 'Personen'},
+        {url:'/settings/', name: 'Einstellungen'}
+
+    ];
+    $scope.isActivePage = function(page){
+        return page.url === $location.path();
+    }
+    $scope.location = $location;
 
 }]);
 
