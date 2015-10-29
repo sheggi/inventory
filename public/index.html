@@ -89,7 +89,7 @@
         </div>
 
         <div ng-controller="listController" class="col-md-3 col-md-pull-9">
-            <div class="list-group">
+            <div class="list-group" ng-cloak>
                 <a ng-repeat="item in itemList" class="list-group-item" ng-click="selectItem(item.id)">{{item.title}}</a>
 
             </div>
@@ -103,7 +103,7 @@
 
 
 <script src="vendor/angular-bootstrap/ui-bootstrap.js"></script>
-
+<script src="service/backend.js"></script>
 <script src="js/app.js"></script>
 </body>
 
